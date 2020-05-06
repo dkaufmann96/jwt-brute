@@ -14,4 +14,7 @@ secret = check(token, characters, maxlength+1)
 end = time.time()
 print "Elapsed time: " + str(end - start) + "s"
 
-print "The secret used to generate the token is \""+ secret +"\"."
+if secret or secret == "":
+    print "The secret used to generate the token is \""+ secret +"\"."
+else:
+    print "The secret could not be determined. Try increasing the maximum length."
