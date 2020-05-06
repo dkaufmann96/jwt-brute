@@ -1,5 +1,5 @@
 # jwt-brute
-Tool to brute force JSON Web Token secrets.
+Tool to brute force JSON Web Token secrets using a naive implementation.
 For educational purposes only.
 
 # Usage
