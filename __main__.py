@@ -8,6 +8,6 @@ token = str(raw_input("Insert token: "))
 
 maxlength = int(raw_input("Max length of secret: "))
 
-secret = check(token, characters, maxlength)
+secret = check(token, characters, maxlength) or ""
 
 print "The secret used to generate the token is \""+ secret +"\"."
