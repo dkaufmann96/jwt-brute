@@ -1,20 +1,16 @@
-from string import letters, digits, punctuation
 from bruteforce import check
+from string import ascii_letters, digits, punctuation
 import time
+import tracemalloc
+
+token = str(input("Insert token: "))
+
+maxlength = int(input("Max length of secret: "))
 
 # use all letters, digits, and special characters for brute forcing
-characters = letters + digits + punctuation
-
-token = str(raw_input("Insert token: "))
-
-maxlength = int(raw_input("Max length of secret: "))
+characters = ascii_letters + digits + punctuation
 
 start = time.time()
-secret = check(token, characters, maxlength+1)
+check(token, characters, maxlength+1)
 end = time.time()
-print "Elapsed time: " + str(end - start) + "s"
-
-if secret or secret == "":
-    print "The secret used to generate the token is \""+ secret +"\"."
-else:
-    print "The secret could not be determined. Try increasing the maximum length."
+print("Elapsed time: " + str(end - start) + "s")
