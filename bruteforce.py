@@ -64,5 +64,5 @@ def outputSecret(secret):
         print("The secret could not be determined. Try increasing the maximum length.")
 
 def shutDownPool(pool: Pool):
-    pool.close()
+    pool.terminate()
     pool.join()
