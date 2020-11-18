@@ -16,12 +16,13 @@ def checkSecret(secret):
     global sharedN
     global sharedC
     
-    with sharedC.get_lock():
-            sharedC.value += 1
     secret = "".join(secret)
     print("N="+ str(sharedN.value) + " - tried secret: \"" + secret + "\"", end='\r')
+    with sharedC.get_lock():
+            sharedC.value += 1
     if validate(sharedToken.value, secret):
         return secret
+    
 
 def check(token, characters, maxlength):
     global sharedToken
@@ -45,16 +46,18 @@ def check(token, characters, maxlength):
             sharedN.value = n
         generator = itertools.product(characters, repeat = n)
         for secret in pool.imap_unordered(checkSecret, generator, 5000):
-            if secret:
+            if secret or secret == "":
                 shutDownPool(pool)
                 secretFound = True
                 outputSecret(secret)
+                return secret
+
     if(secretFound == False):
         shutDownPool(pool)
         outputSecret(secret)
 def outputSecret(secret):
     global sharedC
-    if(secret):
+    if(secret or secret == ""):
         print("The secret used to generate the token is \""+ secret +"\".")
     else:
         print("Tries: " + str(sharedC.value))
